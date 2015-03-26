@@ -1,0 +1,11 @@
+Usage: docker run [OPTIONS] grupocitec/ubuntubase[:TAG] [COMMAND ...]
+
+Run odoo in a docker container.
+
+Positional arguments:
+  COMMAND          The command to run. (default: help)
+
+Commands:
+  help             Show this help message
+  login            Run in shell mode as root(if blank) or any other user(if specified)
+

@@ -1,0 +1,55 @@
+#!/bin/bash
+#
+# This script is designed to be run inside the container
+#
+
+# fail hard and fast even on pipelines
+set -eo pipefail
+
+function help {
+    set +e
+    cat bin/help.txt
+    set -e
+}
+
+function login  {
+    echo "Running bash"
+    set +e
+    if [[ ! -e $1 ]] 
+        then
+            sudo su - $1
+        else
+            /bin/bash
+        fi
+    SERVICE_PID=$!
+    set -e
+}
+
+# smart shutdown on SIGINT and SIGTERM
+function on_exit() {
+    kill -TERM $SERVICE_PID
+    wait $SERVICE_PID 2>/dev/null
+    exit 0
+}
+trap on_exit INT TERM
+
+echo "Search extra dependencies"
+file="/opt/requirements.sh"
+if [ -f "$file" ]; then
+    echo "Installing extra linux dependencies"
+    source $file
+fi
+
+file="/opt/requirements.txt"
+if [ -f "$file" ]; then
+    echo "Installing extra python dependencies"
+    pip install -r $file
+fi
+
+echo "Running command..."
+for arg in "$*"
+do
+    $arg
+done
+
+wait
