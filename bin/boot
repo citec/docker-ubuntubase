@@ -33,17 +33,16 @@ function on_exit() {
 }
 trap on_exit INT TERM
 
-echo "Search extra dependencies"
-file="/opt/requirements.sh"
+file="/app/environment.sh"
 if [ -f "$file" ]; then
-    echo "Installing extra linux dependencies"
+    echo "Setting up environment"
     source $file
 fi
 
-file="/opt/requirements.txt"
+file="/app/boot.sh"
 if [ -f "$file" ]; then
-    echo "Installing extra python dependencies"
-    pip install -r $file
+    echo "Executing provided extra boot script"
+    source $file
 fi
 
 echo "Running command..."

@@ -9,3 +9,12 @@ Commands:
   help             Show this help message
   login            Run in shell mode as root(if blank) or any other user(if specified)
 
+Optional setup files:
+    environment.sh:
+        Mount a file in /app/environment.sh and it will be ran at boot
+        $ docker run -t -i -v $(pwd -P)/environment.sh:/app/environment.sh grupocitec/ubuntubase
+
+    boot.sh:
+        Mount a file in /app/boot.sh and it will be ran at boot
+        $ docker run -t -i -v $(pwd -P)/boot.sh:/app/boot.sh grupocitec/ubuntubase
+
