@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:13.10
 MAINTAINER GrupoCITEC <ops@grupocitec.com>
 
 # Locales
