@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 MAINTAINER GrupoCITEC <ops@grupocitec.com>
 
 RUN apt-get update
